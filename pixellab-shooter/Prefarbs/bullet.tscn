@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7n4tvtsll8au"]
+
+[ext_resource type="Script" uid="uid://bhjfsjasaapmf" path="res://Scripts/bullet.gd" id="1_6nx5b"]
+[ext_resource type="Texture2D" uid="uid://clt636dtp5fhr" path="res://Assets/Ellipse 31.png" id="2_iyy8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jsbk2"]
+radius = 10.0499
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_6nx5b")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_iyy8y")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jsbk2")
+
+[node name="Screen_Notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="Screen_Notifier" to="." method="_on_screen_notifier_screen_exited"]

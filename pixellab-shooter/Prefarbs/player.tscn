@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciblbem6h5vlk"]
+[gd_scene load_steps=5 format=3 uid="uid://ciblbem6h5vlk"]
 
 [ext_resource type="Script" uid="uid://byy30ba81p3c6" path="res://Scripts/player.gd" id="1_oh85b"]
 [ext_resource type="Texture2D" uid="uid://cbju2bt1xll5m" path="res://Assets/Polygon 1.png" id="1_wenrh"]
+[ext_resource type="PackedScene" uid="uid://b7n4tvtsll8au" path="res://Prefarbs/bullet.tscn" id="2_ofj6p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oh85b"]
 radius = 20.8015
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_oh85b")
+bullet_scene = ExtResource("2_ofj6p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_wenrh")
