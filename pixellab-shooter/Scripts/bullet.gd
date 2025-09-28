@@ -14,3 +14,8 @@ func set_direction(new_direction):
 
 func _on_screen_notifier_screen_exited() -> void:
 	queue_free()
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		body.take_damage(1, global_position)

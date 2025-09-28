@@ -18,4 +18,5 @@ shape = SubResource("CircleShape2D_jsbk2")
 
 [node name="Screen_Notifier" type="VisibleOnScreenNotifier2D" parent="."]
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="Screen_Notifier" to="." method="_on_screen_notifier_screen_exited"]

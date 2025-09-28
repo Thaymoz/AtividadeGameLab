@@ -8,6 +8,9 @@ var cd_shoot : float = 0.5
 var move_speed := 300.0
 var move_direction := Vector2.ZERO
 
+func  _ready() -> void:
+	Global.player = self
+
 func _physics_process(_delta: float) -> void:
 #movimentação do player para andar para os 4 lados
 	move_direction = Input.get_vector("move_left","move_right","move_up","move_down")
