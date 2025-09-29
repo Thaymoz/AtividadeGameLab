@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd7xxw81d3es1"]
+
+[ext_resource type="PackedScene" uid="uid://cetw5ds872o8d" path="res://Prefarbs/power_up.tscn" id="1_uo6w6"]
+
+[node name="PowerUp_freze_enemies" instance=ExtResource("1_uo6w6")]
+type = "freze_enemies"
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0, 0.866667, 0.807843, 1)

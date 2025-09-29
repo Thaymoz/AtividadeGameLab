@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bod63fyctwoxv"]
+
+[ext_resource type="PackedScene" uid="uid://cetw5ds872o8d" path="res://Prefarbs/power_up.tscn" id="1_st1hy"]
+
+[node name="PowerUp_rapid_fire" instance=ExtResource("1_st1hy")]
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0.998722, 0.604732, 1, 1)

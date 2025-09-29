@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cetw5ds872o8d"]
+
+[ext_resource type="Texture2D" uid="uid://k6o42bd7pbq6" path="res://Assets/capsule.png" id="1_nq3uq"]
+[ext_resource type="Script" uid="uid://c1p5c24b5g88k" path="res://Scripts/power_up.gd" id="1_qkayd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qkayd"]
+radius = 9.0
+height = 34.0
+
+[node name="PowerUp" type="Area2D"]
+script = ExtResource("1_qkayd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nq3uq")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qkayd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

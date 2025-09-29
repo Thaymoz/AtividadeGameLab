@@ -65,9 +65,16 @@ theme_override_font_sizes/font_size = 48
 text = "Score:"
 
 [node name="player_health" type="ProgressBar" parent="HUD/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="boss_health" type="ProgressBar" parent="HUD/MarginContainer"]
+visible = false
 layout_mode = 2
 
+[node name="powerup_spawn_times" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="powerup_spawn_times" to="." method="_on_powerup_spawn_times_timeout"]

@@ -14,11 +14,19 @@ var knowback_velocity : Vector2 = Vector2.ZERO
 var knowcback_decay : float = 800
 var knockback_force : float = 400
 
+var is_frozen : bool = false
 
 func  _ready() -> void:
 	player = Global.player 
 	original_color = Sprite.modulate
+	Global.freze_enemies.connect(_on_freze_enemies)
+
+
 func _physics_process(delta: float) -> void:
+	if is_frozen:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 #É o seguinte este if anterior ele calcula para ver se ele tomou algum knowback
 #caso ele ja tenha tomado ele vai configurar a velocidade dele para ser o knowckback
 #então vai andar. Depois disso ele calucla a direção a qual isto vai acontecer e com que força
@@ -59,3 +67,9 @@ func take_damage(amount: int, source_position: Vector2):
 		queue_free()
 		Global.score += score
 	print("Enemy Health is:" + str(healt))
+	
+func _on_freze_enemies(duration : float):
+	is_frozen = true
+	await  get_tree().create_timer(duration).timeout
+	is_frozen = false
+	

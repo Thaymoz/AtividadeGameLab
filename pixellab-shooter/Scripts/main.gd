@@ -16,6 +16,12 @@ var enemy_scenes : Dictionary = {
 	"hard" : preload("res://Actors/enemy_hard.tscn"),
 }
 
+var power_ups_scenes : Dictionary = {
+	"rapid_fire" : preload("res://Prefarbs/power_up_rapid_fire.tscn"),
+	"mega_shoot" : preload("res://Prefarbs/power_up_mega_shoot.tscn"),
+	"freze_enemies" : preload("res://Prefarbs/power_up_freze_enemies.tscn"),
+}
+
 var current_wave := 1
 var enemies_per_wave := 3
 var time_betwen_enemies := 0.3
@@ -102,3 +108,25 @@ func _on_spawn_timer_timeout() -> void:
 
 func update_score_txt(score):
 	score_txt.text = "SCORE:" + str("%02d" % Global.score)
+	
+
+func random_spawn_powerup():
+	if randf() > 0.2:
+		return
+	var powerup_index = randi() % 3
+	var powerup 
+	
+	if powerup_index == 0:
+		powerup = power_ups_scenes["rapid_fire"].instantiate()
+	elif powerup_index == 1:
+		powerup = power_ups_scenes["mega_shoot"].instantiate()
+	elif powerup_index == 2:
+		powerup = power_ups_scenes["freze_enemies"].instantiate()
+		
+	if powerup:
+		powerup.position = Vector2(randi_range(100,600),randi_range(100,400))
+		add_child(powerup)
+
+
+func _on_powerup_spawn_times_timeout() -> void:
+	random_spawn_powerup()
