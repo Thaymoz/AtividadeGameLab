@@ -23,7 +23,7 @@ initial_velocity_max = 850.0
 scale_amount_min = 0.3
 scale_amount_max = 1.2
 scale_amount_curve = SubResource("Curve_mu3k3")
-color = Color(0.266667, 0.894118, 0.996078, 0.701961)
+color = Color(1, 1, 1, 0.776471)
 script = ExtResource("2_mu3k3")
 
 [node name="Timer" type="Timer" parent="."]

@@ -14,8 +14,16 @@ var powerups = {
 	"freze_enemies" : false,
 }
 
+var margin : int = 80
+@onready var viewport_size := get_viewport_rect().size
+
 func  _ready() -> void:
 	Global.player = self
+
+func _process(delta: float) -> void:
+#clamp ele delemita a area
+	global_position.x = clamp(global_position.x,margin, viewport_size.x - margin)
+	global_position.y = clamp(global_position.y,margin, viewport_size.y - margin)
 
 func _physics_process(_delta: float) -> void:
 #movimentação do player para andar para os 4 lados

@@ -28,11 +28,14 @@ var time_betwen_enemies := 0.3
 var time_betwen_waves := 1.0
 var is_spawning := false
 
+
+
 func _ready() -> void:
 	spawn_wave()
 	wave_txt.text = "WAVES: %d" % current_wave
 	score_txt.text = "SCORE:" + str("%02d" % Global.score)
 	Global.score_update.connect(update_score_txt)
+
 
 func spawn_enemy():
 #ele verifica os tipos de inimigos que devem ser utilizados com base em cada wave
