@@ -25,7 +25,7 @@ var is_spawning := false
 func _ready() -> void:
 	spawn_wave()
 	wave_txt.text = "WAVES: %d" % current_wave
-	score_txt.text = "SCORE: %d" + str("%02d" % Global.score)
+	score_txt.text = "SCORE:" + str("%02d" % Global.score)
 	Global.score_update.connect(update_score_txt)
 
 func spawn_enemy():
@@ -101,4 +101,4 @@ func _on_spawn_timer_timeout() -> void:
 
 
 func update_score_txt(score):
-	score_txt.text = "SCORE: %d" + str("%02d" % Global.score)
+	score_txt.text = "SCORE:" + str("%02d" % Global.score)
