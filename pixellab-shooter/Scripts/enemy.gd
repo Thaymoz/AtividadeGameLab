@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const BLOOD_PARTICLE = preload("res://Prefarbs/blood_particle.tscn")
 @onready var Sprite: Sprite2D = $Sprite
 
 @export var move_speed : float = 100
@@ -10,6 +11,7 @@ var direction : Vector2 = Vector2.ZERO
 var player = null
 var knowback_velocity : Vector2 = Vector2.ZERO
 var knowcback_decay : float = 800
+var knockback_force : float = 400
 
 
 func  _ready() -> void:
@@ -45,9 +47,13 @@ func take_damage(amount: int, source_position: Vector2):
 	healt -= amount
 # Ele define a direção do knowckback que é a posição dele menos o source(Q n sei exatamente o que é)
 # e usa o normalized para n ter erro na diagonal.Então ele aplica na função do knowback a direção
-	var knockback_dir = (global_position - source_position).normalized()
-	apply_knockback(knockback_dir * 600)
+	var knockback_dir = (position - source_position).normalized()
+	apply_knockback(knockback_dir * knockback_force)
 	hit_flash()
 	if healt <= 0:
+		var blood_instance = BLOOD_PARTICLE.instantiate()
+		add_sibling(blood_instance)
+		blood_instance.global_position = global_position
+		blood_instance.rotation = direction.angle() + PI
 		queue_free()
 	print("Enemy Health is:" + str(healt))

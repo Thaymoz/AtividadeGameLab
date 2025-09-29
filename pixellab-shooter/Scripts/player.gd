@@ -3,7 +3,7 @@ class_name Player
 
 @export var bullet_scene : PackedScene
 var can_shoot : bool = true
-var cd_shoot : float = 0.5
+var cd_shoot : float = 0.1
 
 var move_speed := 300.0
 var move_direction := Vector2.ZERO

@@ -22,7 +22,6 @@ position = Vector2(960, 540)
 environment = SubResource("Environment_sblpm")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
