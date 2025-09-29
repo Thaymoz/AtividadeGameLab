@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://egn4ubojymdk"]
 
-[ext_resource type="PackedScene" uid="uid://ciblbem6h5vlk" path="res://Prefarbs/player.tscn" id="1_f6udf"]
+[ext_resource type="PackedScene" uid="uid://ciblbem6h5vlk" path="res://Actors/player.tscn" id="1_f6udf"]
 [ext_resource type="Script" uid="uid://bvjoc40f1ch1u" path="res://Scripts/main.gd" id="1_sblpm"]
-[ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Prefarbs/enemy.tscn" id="2_sblpm"]
+[ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Actors/enemy.tscn" id="2_sblpm"]
 
 [sub_resource type="Environment" id="Environment_sblpm"]
 background_mode = 3
@@ -22,6 +22,5 @@ position = Vector2(960, 540)
 environment = SubResource("Environment_sblpm")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
