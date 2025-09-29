@@ -5,6 +5,7 @@ const BLOOD_PARTICLE = preload("res://Prefarbs/blood_particle.tscn")
 
 @export var move_speed : float = 100
 @export var healt : int = 3
+@export var score : int = 10
 
 var original_color := Color.WHITE
 var direction : Vector2 = Vector2.ZERO
@@ -56,4 +57,5 @@ func take_damage(amount: int, source_position: Vector2):
 		blood_instance.global_position = global_position
 		blood_instance.rotation = direction.angle() + PI
 		queue_free()
+		Global.score += score
 	print("Enemy Health is:" + str(healt))

@@ -1,6 +1,9 @@
 extends Node2D
 
 @onready var player: Player = $Player
+@onready var wave_txt: Label = %WaveTxt
+@onready var score_txt: Label = %ScoreTxt
+
 
 @export var enemy_scene : PackedScene
 @export var spawn_margin := 200  
@@ -21,6 +24,9 @@ var is_spawning := false
 
 func _ready() -> void:
 	spawn_wave()
+	wave_txt.text = "WAVES: %d" % current_wave
+	score_txt.text = "SCORE: %d" + str("%02d" % Global.score)
+	Global.score_update.connect(update_score_txt)
 
 func spawn_enemy():
 #ele verifica os tipos de inimigos que devem ser utilizados com base em cada wave
@@ -38,6 +44,7 @@ func spawn_enemy():
 	active_enemies.append(enemy)
 	enemy.tree_exited.connect(on_enemy_exit.bind(enemy))
 
+
 func get_enemy_scene_for_wave(wave : int) -> PackedScene:
 	if wave < 3:
 		return enemy_scenes["easy"]
@@ -46,24 +53,26 @@ func get_enemy_scene_for_wave(wave : int) -> PackedScene:
 	else:
 		return enemy_scenes["hard"]
 
+
 func on_enemy_exit(enemy):
 #esta função além de verificar a lista e remover o que esta escrito nela se o inimigo morrer
 #ela controla as proximas waves ja que com ela ao ver que a lista ta vazia pode ir para a 
 #proxima wave
 	if enemy in active_enemies:
 		active_enemies.erase(enemy)
-		
 	if active_enemies.is_empty():
 		next_wave()
+
 
 func spawn_wave():
 	if is_spawning:
 		return
-	print("Starting wave %d" % current_wave)
+	wave_txt.text = "WAVES: %d" % current_wave
 	for i in enemies_per_wave:
 		spawn_enemy()
 		await get_tree().create_timer(time_betwen_enemies).timeout
-		
+
+
 func next_wave():
 	await get_tree().create_timer(time_betwen_waves).timeout
 	current_wave += 1
@@ -71,8 +80,6 @@ func next_wave():
 	is_spawning = false
 	spawn_wave()
 	
-
-
 
 # -> == return
 func calculate_spawn_position() -> Vector2:
@@ -91,3 +98,7 @@ func calculate_spawn_position() -> Vector2:
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
+
+
+func update_score_txt(score):
+	score_txt.text = "SCORE: %d" + str("%02d" % Global.score)
