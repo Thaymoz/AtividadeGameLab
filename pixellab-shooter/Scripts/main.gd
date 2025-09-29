@@ -3,6 +3,7 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var wave_txt: Label = %WaveTxt
 @onready var score_txt: Label = %ScoreTxt
+@onready var player_health: ProgressBar = %player_health
 
 
 @export var enemy_scene : PackedScene
@@ -34,6 +35,8 @@ func _ready() -> void:
 	spawn_wave()
 	wave_txt.text = "WAVES: %d" % current_wave
 	score_txt.text = "SCORE:" + str("%02d" % Global.score)
+	player_health.value = player.max_health
+	player_health.max_value = player.max_health
 	Global.score_update.connect(update_score_txt)
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://egn4ubojymdk"]
+[gd_scene load_steps=8 format=3 uid="uid://egn4ubojymdk"]
 
 [ext_resource type="PackedScene" uid="uid://ciblbem6h5vlk" path="res://Actors/player.tscn" id="1_f6udf"]
 [ext_resource type="Script" uid="uid://bvjoc40f1ch1u" path="res://Scripts/main.gd" id="1_sblpm"]
@@ -11,6 +11,20 @@ glow_enabled = true
 glow_intensity = 1.5
 glow_bloom = 0.5
 glow_hdr_threshold = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wwxx"]
+bg_color = Color(0.00392157, 0.0862745, 0.152941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amdw"]
+bg_color = Color(0.360784, 0.964706, 0.290196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sblpm")
@@ -65,8 +79,15 @@ theme_override_font_sizes/font_size = 48
 text = "Score:"
 
 [node name="player_health" type="ProgressBar" parent="HUD/MarginContainer"]
-visible = false
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 40)
 layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_2wwxx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3amdw")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="boss_health" type="ProgressBar" parent="HUD/MarginContainer"]
 visible = false

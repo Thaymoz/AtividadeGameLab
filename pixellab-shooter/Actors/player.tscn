@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciblbem6h5vlk"]
+[gd_scene load_steps=6 format=3 uid="uid://ciblbem6h5vlk"]
 
 [ext_resource type="Script" uid="uid://byy30ba81p3c6" path="res://Scripts/player.gd" id="1_oh85b"]
 [ext_resource type="Texture2D" uid="uid://cbju2bt1xll5m" path="res://Assets/Polygon 1.png" id="1_wenrh"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oh85b"]
 radius = 20.8015
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xk7p5"]
+radius = 24.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_oh85b")
@@ -19,3 +22,11 @@ texture = ExtResource("1_wenrh")
 position = Vector2(1.19209e-07, 7)
 rotation = -0.976614
 shape = SubResource("CircleShape2D_oh85b")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="collision" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_xk7p5")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

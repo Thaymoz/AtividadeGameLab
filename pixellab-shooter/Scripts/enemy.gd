@@ -12,7 +12,7 @@ var direction : Vector2 = Vector2.ZERO
 var player = null
 var knowback_velocity : Vector2 = Vector2.ZERO
 var knowcback_decay : float = 800
-var knockback_force : float = 400
+var knockback_force : float = 325
 
 var is_frozen : bool = false
 
@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if knowback_velocity.length() > 1:
 		velocity = knowback_velocity
 		move_and_slide()
-		knowback_velocity = knowback_velocity.move_toward(Vector2.ZERO, knowcback_decay *delta)
+		knowback_velocity = knowback_velocity.move_toward(Vector2.ZERO, knowcback_decay * delta)
 #Ai caso não tenha ocorrido nem um impulso ele vai executar essa função de andar
 #que até então é sempre executada na direção do player
 	else:

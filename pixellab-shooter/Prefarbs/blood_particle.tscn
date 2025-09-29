@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfepso5cddtj"]
+[gd_scene load_steps=5 format=3 uid="uid://bfepso5cddtj"]
 
 [ext_resource type="Texture2D" uid="uid://bm0ebovkn1fj4" path="res://Assets/Rectangle 119.png" id="1_bmf2f"]
+[ext_resource type="Script" uid="uid://cr2hnmmvaq1lb" path="res://Scripts/particle.gd" id="1_ta7ru"]
 [ext_resource type="Script" uid="uid://dlnukxdl7vyst" path="res://Scripts/blood_particle.gd" id="2_mu3k3"]
 
 [sub_resource type="Curve" id="Curve_mu3k3"]
 _data = [Vector2(0.244186, 0.486381), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="BloodParticle" type="CPUParticles2D"]
+[node name="Particles" type="Node2D"]
+script = ExtResource("1_ta7ru")
+
+[node name="BloodParticle" type="CPUParticles2D" parent="."]
 z_index = -10
 amount = 16
 texture = ExtResource("1_bmf2f")
@@ -26,9 +30,9 @@ scale_amount_curve = SubResource("Curve_mu3k3")
 color = Color(1, 1, 1, 0.776471)
 script = ExtResource("2_mu3k3")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="BloodParticle"]
 wait_time = 0.2
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BloodParticle/Timer" to="BloodParticle" method="_on_timer_timeout"]
