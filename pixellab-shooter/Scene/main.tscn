@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://egn4ubojymdk"]
+[gd_scene load_steps=5 format=3 uid="uid://egn4ubojymdk"]
 
 [ext_resource type="PackedScene" uid="uid://ciblbem6h5vlk" path="res://Prefarbs/player.tscn" id="1_f6udf"]
+[ext_resource type="Script" uid="uid://bvjoc40f1ch1u" path="res://Scripts/main.gd" id="1_sblpm"]
 [ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Prefarbs/enemy.tscn" id="2_sblpm"]
 
 [sub_resource type="Environment" id="Environment_sblpm"]
@@ -11,12 +12,17 @@ glow_bloom = 0.5
 glow_hdr_threshold = 2.0
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_sblpm")
+enemy_scene = ExtResource("2_sblpm")
 
 [node name="Player" parent="." instance=ExtResource("1_f6udf")]
-position = Vector2(708, 487)
-
-[node name="Enemy" parent="." instance=ExtResource("2_sblpm")]
-position = Vector2(162, 186)
+position = Vector2(960, 540)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sblpm")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
