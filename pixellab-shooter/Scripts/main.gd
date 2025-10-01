@@ -1,5 +1,11 @@
 extends Node2D
 
+@export var boss_scene : PackedScene = preload("res://Actors/boss.tscn")
+@export var boss_wave_interval := 10
+@onready var boss_health: ProgressBar = %boss_health
+
+
+
 @onready var player: Player = $Player
 @onready var wave_txt: Label = %WaveTxt
 @onready var score_txt: Label = %ScoreTxt
@@ -26,7 +32,7 @@ var power_ups_scenes : Dictionary = {
 var current_wave := 1
 var enemies_per_wave := 3
 var time_betwen_enemies := 0.3
-var time_betwen_waves := 1.0
+var time_betwen_waves := 1.2
 var is_spawning := false
 
 
@@ -58,9 +64,9 @@ func spawn_enemy():
 
 
 func get_enemy_scene_for_wave(wave : int) -> PackedScene:
-	if wave < 3:
+	if wave < 10:
 		return enemy_scenes["easy"]
-	elif wave < 6:
+	elif wave < 20:
 		return enemy_scenes["medium"]
 	else:
 		return enemy_scenes["hard"]
@@ -80,12 +86,42 @@ func spawn_wave():
 	if is_spawning:
 		return
 	wave_txt.text = "WAVES: %d" % current_wave
-	for i in enemies_per_wave:
-		spawn_enemy()
-		await get_tree().create_timer(time_betwen_enemies).timeout
+	
+	var is_boss_wave = current_wave % boss_wave_interval == 0
+	if is_boss_wave:
+		spawn_boss()
+	else:
+		for i in enemies_per_wave:
+			spawn_enemy()
+			await get_tree().create_timer(time_betwen_enemies).timeout
 
+func spawn_boss():
+	var boss = boss_scene.instantiate()
+	add_child(boss)
+	var base_pos = player.global_position
+	var dir = Vector2(1,0).rotated(randf_range(0,TAU))
+	boss.global_position = calculate_spawn_position()
+	boss.player = player
+	active_enemies.append(boss)
+	boss.tree_exited.connect(on_enemy_exit.bind(boss))
+	boss.health_changed.connect(update_boss_health_bar)
+	boss.died.connect(hide_boss_health_bar)
+	
+	boss_health.max_value = boss.max_health
+	boss_health.value = boss.max_health
+	boss_health.visible = true
+	
+func update_boss_health_bar(current, max):
+	boss_health.max_value = max
+	boss_health.value = current 
+func hide_boss_health_bar():
+	boss_health.visible = false
 
 func next_wave():
+#isso corrige um bug q n sei exatamente o que é mas acredito que antes ele tentava processar algo
+#mas ai o jogo morreu e ai ele n carrega e seila qual é o problema disso
+	if !is_inside_tree():
+		await  ready
 	await get_tree().create_timer(time_betwen_waves).timeout
 	current_wave += 1
 	enemies_per_wave += 1
@@ -130,7 +166,7 @@ func random_spawn_powerup():
 		powerup = power_ups_scenes["freze_enemies"].instantiate()
 		
 	if powerup:
-		powerup.position = Vector2(randi_range(100,600),randi_range(100,400))
+		powerup.position = Vector2(randi_range(200,1720),randi_range(200,880))
 		add_child(powerup)
 
 

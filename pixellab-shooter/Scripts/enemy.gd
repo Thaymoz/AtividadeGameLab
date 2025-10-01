@@ -66,10 +66,10 @@ func take_damage(amount: int, source_position: Vector2):
 		blood_instance.rotation = direction.angle() + PI
 		blood_instance.modulate = Color.from_hsv(original_color.h, 0.85, 1.0, 0.7)
 		CameraEffects.start_shake(2.0)
-		
 		queue_free()
 		Global.score += score
-	print("Enemy Health is:" + str(healt))
+		Global.novo_highscore()
+	#print("Enemy Health is:" + str(healt))
 	
 func _on_freze_enemies(duration : float):
 	is_frozen = true

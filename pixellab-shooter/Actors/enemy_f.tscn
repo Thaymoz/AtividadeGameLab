@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Actors/enemy.tscn" id="1_nt0wk"]
 
-[node name="EnemyF" instance=ExtResource("1_nt0wk")]
+[node name="EnemyF" groups=["enemies"] instance=ExtResource("1_nt0wk")]
+healt = 3
+score = 35
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color(0, 0.231373, 0.360784, 1)

@@ -10,7 +10,7 @@ func _ready() -> void:
 	can_fade = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if can_fade:
 #"caminhe" até lá
 		alpha = lerp(alpha, 0.0 , 0.1)

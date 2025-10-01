@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Actors/enemy.tscn" id="1_dvsq4"]
 
-[node name="EnemyC" instance=ExtResource("1_dvsq4")]
+[node name="EnemyC" groups=["enemies"] instance=ExtResource("1_dvsq4")]
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color(0.0470588, 0.282353, 0.117647, 1)

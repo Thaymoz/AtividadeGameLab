@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PixelLab Shooter"
-run/main_scene="uid://egn4ubojymdk"
+run/main_scene="uid://61slb6pjx36u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -31,6 +31,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 enemies=""
+boss=""
 
 [input]
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsf1wqqnpiipt"]
+
+[ext_resource type="PackedScene" uid="uid://dax1qptjw1hrk" path="res://Actors/enemy.tscn" id="1_mtrdp"]
+[ext_resource type="Script" uid="uid://dhy5lt6jgyhx6" path="res://Scripts/boss.gd" id="2_c4skx"]
+
+[node name="Boss" groups=["boss"] instance=ExtResource("1_mtrdp")]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("2_c4skx")
+max_health = 20.0
+healt = 3
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0.733333, 0.0313726, 0.156863, 1)
+
+[node name="Collision" parent="." index="1"]
+visible = true
